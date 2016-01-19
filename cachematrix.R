@@ -4,7 +4,9 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-
+##check if not already set
+    ##if so then retrieve cached value
+    ##if not then calculate value
 }
 
 
