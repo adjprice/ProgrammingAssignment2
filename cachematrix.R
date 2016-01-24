@@ -4,14 +4,42 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-##check if not already set
-    ##if so then retrieve cached value
-    ##if not then calculate value
+
+    
+    i<- NULL
+    set<-function(y) {
+        x<<- y
+        i<<- NULL
+    }
+    
+    ##functions to get and set inverted matrix
+    get<-function() x
+    setInverse<- function(solve) i <<- solve
+    getInverse<- function() i
+
+    list(
+        set=set,
+        get=get,
+        setInverse=setInverse,
+        getInverse=getInverse)
 }
 
 
-## Write a short comment describing this function
+## computes the inverse of matrix
+## if the inverse has been calculated (and still the same matrix)
+##then cached inverse is returned
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(c, ...) {
+   ##c is a matrix
+   i <- c$getInverse()
+     ## does the matrix exist?
+    if(!is.null(i)){
+        return(i)
+    }
+    
+    #no cached matrix, so need to invert matrix and cache
+    MatrixtoInvert<- c$get()
+    i<- solve(MatrixtoInvert)
+    c$setInverse(i)
+    i
 }
